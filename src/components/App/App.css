@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  padding-top: 50px;
+  background-color: #fffffc;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .body {
