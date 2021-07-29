@@ -6,25 +6,21 @@
   padding-bottom: 100px;
 }
 
-.bar-chart {
-  /* padding: 20px; */
-}
-
 path {
   stroke: black;
 }
 
 .annotation-group {
   font-size: x-small;
-  font-weight: lighter;
 }
 
 .toolTip {
   position: absolute;
-  display: none;
+  visibility: hidden;
   background: none repeat scroll 0 0 #ffffff;
   border: 1px solid #6f257f;
   padding: 10px;
   text-align: center;
   font-size: x-small;
+  z-index: 1;
 }

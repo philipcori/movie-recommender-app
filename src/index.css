@@ -15,10 +15,6 @@ body {
   height: 100%;
 }
 
-.custom-file-input:hover {
-  cursor: pointer;
-}
-
 .light {
   font-family: "Roboto-light", sans-serif;
 }

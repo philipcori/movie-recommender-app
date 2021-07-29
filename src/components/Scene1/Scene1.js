@@ -10,9 +10,9 @@ export const Scene1 = () => {
   return (
     <div className="scene1 center">
       <h1>Which guns are used the most?</h1>
-      <div className="bar-chart">
-        <svg width={1000} height={400}></svg>
-      </div>
+      <div className="center">
+        <svg id="scene1-svg"></svg>
+      </div>{" "}
     </div>
   );
 };
@@ -38,7 +38,7 @@ const createBarGraph = async (height, width) => {
   const maxVal = d3.max(data.map((elt) => elt.num_used));
   const yScale = d3.scaleLinear().domain([0, maxVal]).range([height, 0]);
 
-  const svg = d3.select("svg");
+  const svg = d3.select("#scene1-svg").attr("width", 600).attr("height", 400);
 
   // Add y axis
   const yAxis = d3.axisLeft().scale(yScale);
@@ -100,9 +100,7 @@ const createBarGraph = async (height, width) => {
     })
     .on("mouseover", function (event, d) {
       tooltip
-        .style("left", `${event.pageX}px`)
-        .style("top", `${event.pageY}px`)
-        .style("display", "inline-block")
+        .style("visibility", "visible")
         .html(
           `<p>${d.gun_type}s are used in ${(
             (d.num_used / totalNumUsed) *
@@ -110,11 +108,17 @@ const createBarGraph = async (height, width) => {
           ).toFixed(2)}% of cases</p>`
         );
     })
-    .on("mouseout", function (d) {
-      tooltip.style("display", "none");
+    .on("mousemove", (event, d) => {
+      tooltip
+        .style("left", `${event.pageX}px`)
+        .style("top", `${event.pageY}px`);
     });
+  // .on("mouseleave", (d) => {
+  //   console.log("mouse out");
+  //   tooltip.style("visibility", "hidden");
+  // });
 
-  //Add annotations
+  //Add annotation
   const annotations = [
     {
       data: { gun_type: "Handgun", num_used: 25048 },
@@ -145,17 +149,7 @@ const createBarGraph = async (height, width) => {
       gun_type: (d) => xScale.invert(d.x),
       num_used: (d) => yScale.invert(d.y),
     })
-    .annotations(annotations)
-    .on("subjectover", function (annotation) {
-      annotation.type.a
-        .selectAll("g.annotation-connector, g.annotation-note")
-        .classed("hidden", false);
-    })
-    .on("subjectout", function (annotation) {
-      annotation.type.a
-        .selectAll("g.annotation-connector, g.annotation-note")
-        .classed("hidden", true);
-    });
+    .annotations(annotations);
 
   svg.append("g").attr("class", "annotation-group").call(makeAnnotations);
   svg
