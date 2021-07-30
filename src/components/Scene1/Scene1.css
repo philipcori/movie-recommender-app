@@ -23,4 +23,10 @@ path {
   text-align: center;
   font-size: x-small;
   z-index: 1;
+  width: 100px;
+  margin-bottom: 0;
+}
+
+.toolTip p {
+  margin-bottom: 0px;
 }

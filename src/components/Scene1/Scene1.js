@@ -12,7 +12,7 @@ export const Scene1 = () => {
       <h1>Which guns are used the most?</h1>
       <div className="center">
         <svg id="scene1-svg"></svg>
-      </div>{" "}
+      </div>
     </div>
   );
 };
@@ -26,7 +26,7 @@ const createBarGraph = async (height, width) => {
     }
   );
   const margin = {
-    top: 50,
+    top: 70,
     right: 50,
     bottom: 50,
     left: 150,
@@ -38,7 +38,7 @@ const createBarGraph = async (height, width) => {
   const maxVal = d3.max(data.map((elt) => elt.num_used));
   const yScale = d3.scaleLinear().domain([0, maxVal]).range([height, 0]);
 
-  const svg = d3.select("#scene1-svg").attr("width", 600).attr("height", 400);
+  const svg = d3.select("#scene1-svg").attr("width", 800).attr("height", 400);
 
   // Add y axis
   const yAxis = d3.axisLeft().scale(yScale);
@@ -105,12 +105,12 @@ const createBarGraph = async (height, width) => {
           `<p>${d.gun_type}s are used in ${(
             (d.num_used / totalNumUsed) *
             100
-          ).toFixed(2)}% of cases</p>`
+          ).toFixed(2)}% of cases, with a total of ${d.num_used} cases.</p>`
         );
     })
     .on("mousemove", (event, d) => {
       tooltip
-        .style("left", `${event.pageX}px`)
+        .style("left", `${event.pageX + 10}px`)
         .style("top", `${event.pageY}px`);
     });
   // .on("mouseleave", (d) => {
@@ -123,7 +123,7 @@ const createBarGraph = async (height, width) => {
     {
       data: { gun_type: "Handgun", num_used: 25048 },
       dy: -10,
-      dx: -10,
+      dx: 10,
       className: "show-bg",
     },
   ].map((l) => {

@@ -21,7 +21,7 @@ export const Scene2 = () => {
 
 const createChoropleth = async (width, height) => {
   const margin = {
-    top: 50,
+    top: 70,
     right: 50,
     bottom: 50,
     left: 150,
@@ -65,14 +65,14 @@ const createChoropleth = async (width, height) => {
         .html(
           `<p>${((d.properties.counts / sumCounts) * 100).toFixed(
             2
-          )}% of cases occurred in ${d.properties.state}</p>`
+          )}% of cases occurred in ${d.properties.state}, with a total of ${
+            d.properties.counts
+          } cases.</p>`
         );
     })
     .on("mousemove", function (event, d) {
-      console.log("x: " + event.pageX);
-      console.log("y: " + event.pageY);
       tooltip
-        .style("left", `${event.pageX}px`)
+        .style("left", `${event.pageX + 10}px`)
         .style("top", `${event.pageY}px`);
     });
 
@@ -88,7 +88,6 @@ const createChoropleth = async (width, height) => {
       )
     );
 
-  const legendTitle = "Number of gun violence cases";
   const legend = svg
     .selectAll(".legendEntry")
     .data(color.range().reverse())
@@ -151,12 +150,8 @@ const createChoropleth = async (width, height) => {
     .type(d3Annotation.annotationLabel)
     .accessors({
       x: (d) => 305,
-      y: (d) => 105,
+      y: (d) => 125,
     })
-    // .accessorsInverse({
-    //   gun_type: (d) => xScale.invert(d.x),
-    //   num_used: (d) => yScale.invert(d.y),
-    // })
     .annotations(annotations);
 
   svg.append("g").attr("class", "annotation-group").call(makeAnnotations);
