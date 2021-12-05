@@ -1,30 +1,40 @@
 import React from "react";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import GenreRecomender from "../GenreRecommender";
+import GenreRecommender from "../GenreRecommender";
+import RatingsRecommender from "../RatingsRecommender";
 import "./App.css";
-import { Intro } from "../Intro";
-import { Scene1 } from "../Scene1/Scene1";
-import { Scene2 } from "../Scene2/Scene2";
-import { Scene3 } from "../Scene3";
-import { Conclusion } from "../Conclusion";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
-import * as d3 from "d3";
 
 const App = () => {
   return (
     <div className="App">
-      <Carousel onChange={disableTooltip} showArrows={true}>
-        <Intro />
-        <Scene1 />
-        <Scene2 />
-        <Scene3 />
-        <Conclusion />
-      </Carousel>
+      <Router>
+        <h1>Movie Recommender</h1>
+        <Navigation />
+        <Routes>
+          <Route path="/genre-recommender" element={<GenreRecomender />} />
+          <Route path="/ratings-recommender" element={<RatingsRecommender />} />
+        </Routes>
+      </Router>
     </div>
   );
 };
 
-const disableTooltip = () => {
-  d3.selectAll(".toolTip").style("visibility", "hidden");
+const Navigation = () => {
+  return (
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="genre-recommender">System 1</Nav.Link>
+            <Nav.Link href="ratings-recommender">System 2</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
 };
 
 export default App;
