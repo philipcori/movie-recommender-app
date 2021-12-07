@@ -4,6 +4,19 @@ import "./index.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
+import Amplify from "aws-amplify";
+import { Constants } from "./util/Constants";
+Amplify.configure({
+  API: {
+    endpoints: [
+      {
+        name: Constants.API,
+        // endpoint: "https://e5q3z9uoq9.execute-api.us-west-2.amazonaws.com/dev",
+        endpoint: "http://localhost:5000",
+      },
+    ],
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>

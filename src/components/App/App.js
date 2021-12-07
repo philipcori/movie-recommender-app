@@ -2,7 +2,6 @@ import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GenreRecomender from "../GenreRecommender";
-import GenreRecommender from "../GenreRecommender";
 import RatingsRecommender from "../RatingsRecommender";
 import "./App.css";
 

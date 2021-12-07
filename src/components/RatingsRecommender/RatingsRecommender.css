@@ -1,0 +1,10 @@
+.ratings-recommender {
+  display: flex;
+  flex-direction: row;
+  height: 60vh;
+  overflow-y: scroll;
+}
+
+.rec-section {
+  padding: 30px;
+}
