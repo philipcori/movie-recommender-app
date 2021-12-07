@@ -11,8 +11,8 @@ Amplify.configure({
     endpoints: [
       {
         name: Constants.API,
-        // endpoint: "https://e5q3z9uoq9.execute-api.us-west-2.amazonaws.com/dev",
-        endpoint: "http://localhost:5000",
+        endpoint: "https://e5q3z9uoq9.execute-api.us-west-2.amazonaws.com/dev",
+        // endpoint: "http://localhost:5000",
       },
     ],
   },
