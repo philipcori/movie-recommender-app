@@ -6,7 +6,7 @@ import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import MovieRater from "../MovieRater";
 import RecPage from "../RecPage";
 
-const TOTAL_NUM_MOVIES = 100;
+const TOTAL_NUM_MOVIES = 500;
 
 const RatingsRecommender = () => {
   const [ratings, setRatings] = useState([]);
@@ -19,7 +19,7 @@ const RatingsRecommender = () => {
     fetch("/pop_movies.txt")
       .then((r) => r.text())
       .then((text) => {
-        let movieIds = text.split("\r\n");
+        let movieIds = text.split("\n");
         movieIds = movieIds.slice(0, TOTAL_NUM_MOVIES);
         const newArr = [];
         for (let i = 0; i < TOTAL_NUM_MOVIES - 5; i += 5) {
