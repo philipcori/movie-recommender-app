@@ -37,7 +37,7 @@ const RatingsRecommender = () => {
 
   const getRecs = () => {
     setRecsLoading(true);
-    API.get(Constants.API, "/get_recs", {
+    API.get(Constants.API, "/system2/get_recs", {
       queryStringParameters: {
         ratings: JSON.stringify(ratings),
       },
@@ -50,19 +50,18 @@ const RatingsRecommender = () => {
 
   const handleRateMovie = (nextValue, prevValue, name) => {
     const idx = ratings.findIndex((rating) => rating.movieId === name);
+    const newRatings = ratings.slice();
     if (idx > -1) {
-      ratings[idx].rating = nextValue;
-      setRatings(ratings);
+      newRatings[idx].rating = nextValue;
+      setRatings(newRatings);
       return;
     }
-    ratings.push({
+    newRatings.push({
       movieId: name,
       rating: nextValue,
     });
-    setRatings(ratings);
+    setRatings(newRatings);
   };
-
-  console.log(recsLoading);
 
   return (
     <div className="App">
@@ -91,9 +90,16 @@ const RatingsRecommender = () => {
           })}
         </Container>
       </div>
-      <Button onClick={getRecs} style={{ marginTop: "30px" }}>
-        Get Recommendations
-      </Button>
+      {ratings.length > 0 ? (
+        <Button onClick={getRecs} style={{ marginTop: "30px" }}>
+          Get Recommendations
+        </Button>
+      ) : (
+        <Button onClick={getRecs} style={{ marginTop: "30px" }} disabled>
+          Get Recommendations
+        </Button>
+      )}
+
       <div className="rec-section" style={{ marginTop: "30px" }}>
         {recsLoading && <Spinner animation="border" />}
         {recs.length > 0 && <RecPage recs={recs} />}

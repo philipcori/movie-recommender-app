@@ -12,7 +12,6 @@ const RecPage = (props) => {
   };
 
   const recs = recsTo2DArray(props.recs);
-  console.log(recs);
   return (
     <>
       <Container className="container">
