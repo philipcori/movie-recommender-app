@@ -30,14 +30,14 @@ const GenreRecomender = () => {
   const [genre, setGenre] = useState("");
   const [loading, setLoading] = useState(false);
   const [recs, setRecs] = useState([]);
-  const [popImportance, setPopImportance] = useState(0);
+  const [popImportance, setPopImportance] = useState(-1);
 
   const getRecs = () => {
     setLoading(true);
     API.get(Constants.API, "/system1/get_recs", {
       queryStringParameters: {
         num: 10,
-        popularityImportance: parseInt(popImportance * 300, 10),
+        popularityImportance: parseInt(popImportance * 600, 10),
         genre: genre,
       },
     }).then((res) => {
@@ -61,7 +61,7 @@ const GenreRecomender = () => {
         {/* <h3 style={{ float: "left" }}>Genre Recommender</h3> */}
         <DropdownButton
           onSelect={handleSelect}
-          title={genre !== "" ? genre : "Select Genre"}
+          title={genre !== "" ? `Genre: ${genre}` : "Select Genre"}
         >
           {GENRES.map((genre) => {
             return <Dropdown.Item eventKey={genre}>{genre}</Dropdown.Item>;
@@ -70,14 +70,18 @@ const GenreRecomender = () => {
         <DropdownButton
           style={{ marginLeft: "50px" }}
           onSelect={handlePopImportance}
-          title={popImportance === 0 ? "Popularity Importance" : popImportance}
+          title={
+            popImportance === -1
+              ? "Popularity Importance"
+              : `Popularity Importance: ${popImportance}`
+          }
         >
-          {[...Array(10).keys()].map((num) => {
-            return <Dropdown.Item eventKey={num + 1}>{num + 1}</Dropdown.Item>;
+          {[...Array(6).keys()].map((num) => {
+            return <Dropdown.Item eventKey={num}>{num}</Dropdown.Item>;
           })}
         </DropdownButton>
       </div>
-      {genre === "" || popImportance === 0 ? (
+      {genre === "" || popImportance === -1 ? (
         <Button onClick={getRecs} style={{ marginTop: "30px" }} disabled>
           Get Recommendations
         </Button>
