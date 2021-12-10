@@ -65,6 +65,7 @@ const RatingsRecommender = () => {
 
   return (
     <div className="App">
+      <h3>Rate as many movies as possible</h3>
       <div className="ratings-recommender">
         <Container className="container">
           {movieIds.map((row) => {
